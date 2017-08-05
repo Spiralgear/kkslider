@@ -1,28 +1,40 @@
-# RhinoBot: The music bot for Discord.
+# heroku-buildpack-apt [![Build Status](https://travis-ci.org/heroku/heroku-buildpack-apt.svg?branch=master)](https://travis-ci.org/heroku/heroku-buildpack-apt)
 
-MusicBot is a Discord music bot written in [Python](https://www.python.org "Python homepage"). It plays requested songs and if the queue becomes empty it will play through a list of existing songs.
+Add support for apt-based dependencies during both compile and runtime.
 
-### How do I set it up?
+## Usage
 
-[CLICK HERE](https://github.com/SexualRhinoceros/MusicBot/wiki) to find the guide that suites your operating system.
+This buildpack is not meant to be used on its own, and instead should be in used in combination with Heroku's [multiple buildpack support](https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app).
 
-### Commands
+Include a list of apt package names to be installed in a file named `Aptfile`
 
-Commands are listed [here](https://github.com/SexualRhinoceros/MusicBot/wiki/Commands "Commands list").
+## Example
 
-### Configuration
+#### Command-line
 
-The main configuration file is `config/options.ini`, but is not included.  Simply make a copy of `example_options.ini` and rename to `options.ini`.  See `example_options.ini` for more information on how to configure it.
+```
+heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
+```
 
-[CLICK HERE](https://github.com/SexualRhinoceros/MusicBot/wiki/Configuration) for more details.
+#### Aptfile
 
-### Great, now how do I use it?
-Download the bot, set the dependencies up, then run `runbot.bat`! (or `run.sh` on mac/linux)  Read the tutorial if you don't know what to do.
+    libpq-dev
+    http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-precise-amd64.deb
 
-If you have any errors, read the FAQ. If that didn't help, you can ask for assistance on the discord help server. Is is recommended to take screenshots so the developers can see errors.
+#### Gemfile
 
-[Rhino Help Server](http://discord.me/rhinohelp "Discord link")
+    source "https://rubygems.org"
+    gem "pg"
 
-### FAQ
+### Check out the PG library version
 
-Some frequently asked questions are listed on the wiki [here](https://github.com/SexualRhinoceros/MusicBot/wiki/FAQ "Wiki").
+    $ heroku run bash -a apt-pg-test
+    ~ $ irb
+	irb(main):001:0> require "pg"
+	=> true
+	irb(main):002:0> PG::version_string
+	=> "PG 0.15.1"
+
+## License
+
+MIT
