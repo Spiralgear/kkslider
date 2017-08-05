@@ -1,4 +1,12 @@
-discord.py[voice] ~= 0.12.0
-youtube_dl
+discord.py[voice] pytz
+memory_profiler
 pip
-cffi==1.6.0; sys_platform == 'win32'
+youtube_dl
+imgurpython
+aiohttp
+websockets
+chardet
+PyNaCl
+cffi
+pycparser
+mcstatus
